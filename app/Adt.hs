@@ -44,8 +44,22 @@ interface :: Adt -> String
 interface a =  printf "type %s%s interface { impl%s() }\n"
   (name a) (gensDef a) (name a)
 
+-- struct for a given data constructor (rule)
+-- the body of the struct are the rule's fields
+-- type Tag[A ... any] struct { f1 t1; ... }
+struct :: Adt -> Rule -> String
+struct a r = printf "type %s%s struct { %s }\n"
+  (tag r) (gensDef a) (body "; " r)
+
 -- interface implementation for a given data constructor (rule)
 -- func (_ Tag[A, ...] implTag() {}
 impl :: Adt -> Rule -> String
 impl a r = printf "func (_ %s%s) impl%s() {}\n"
   (tag r) (gensFun a) (name a)
+
+-- generate the body of a struct, func params, ... based on fields
+-- if "; " is the separator:
+-- id1 ty1; id2 ty2; ... 
+body :: String -> Rule -> String
+body s = intercalate s . map field . fields
+  where field f = fid f ++ " " ++ fty f

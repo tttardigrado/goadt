@@ -25,11 +25,13 @@ library goadt-lib
     exposed-modules:  Adt
     hs-source-dirs:   app
     build-depends:    base ^>=4.13
+                 ,    parsec
     default-language: Haskell2010
 
 executable goadt
     main-is:          Main.hs
     build-depends:    base ^>=4.13
+                 ,    parsec
                  ,    goadt-lib
     other-modules:    Adt
     hs-source-dirs:   app

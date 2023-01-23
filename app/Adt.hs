@@ -43,3 +43,9 @@ gensFun a = if null $ params a then "" else printf "[%s]"
 interface :: Adt -> String
 interface a =  printf "type %s%s interface { impl%s() }\n"
   (name a) (gensDef a) (name a)
+
+-- interface implementation for a given data constructor (rule)
+-- func (_ Tag[A, ...] implTag() {}
+impl :: Adt -> Rule -> String
+impl a r = printf "func (_ %s%s) impl%s() {}\n"
+  (tag r) (gensFun a) (name a)

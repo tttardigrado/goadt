@@ -71,3 +71,17 @@ construcct a r = printf "func New%s%s(%s) %s%s { return %s%s{ %s } }\n"
 body :: String -> Rule -> String
 body s = intercalate s . map field . fields
   where field f = fid f ++ " " ++ fty f
+
+-- Golang ADT multiline string generator
+-- takes and adt and generates it's
+--     interface, structs, impl funcs and constructors 
+makeAdt :: Adt -> String
+makeAdt a = concat
+  [ interface a
+  , "\n\n// Data Constructors Structs\n"
+  , concatMap (struct a) (rules a)
+  , "\n\n// Implement the interface\n"
+  , concatMap (impl a) (rules a)
+  , "\n\n// Constructors\n"
+  , concatMap (construcct a) (rules a)
+  ]

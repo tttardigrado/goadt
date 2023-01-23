@@ -1,0 +1,48 @@
+cabal-version:      2.4
+name:               goadt
+version:            0.1.0.0
+
+-- A short (one-line) description of the package.
+synopsis: Algebraic data types generator for the Go programming language
+
+-- A longer description of the package.
+-- description:
+
+-- A URL where users can report bugs.
+-- bug-reports:
+
+-- The license under which the package is released.
+-- license:
+author:               Gonçalo Teixeira
+maintainer:           gspteixeira@gmail.com
+
+-- A copyright notice.
+-- copyright:
+-- category:
+extra-source-files:   CHANGELOG.md
+
+library goadt-lib
+    -- exposed-modules:
+    hs-source-dirs:   app
+    build-depends:    base ^>=4.13
+    default-language: Haskell2010
+
+executable goadt
+    main-is:          Main.hs
+    build-depends:    base ^>=4.13
+                 ,    goadt-lib
+    --other-modules:
+    hs-source-dirs:   app
+    --other-extensions:
+    default-language: Haskell2010
+
+test-suite tests
+    type:             exitcode-stdio-1.0
+    main-is:          Test.hs
+    build-depends:    base ^>=4.13
+                 ,    HUnit ^>=1.6
+                 ,    goadt-lib
+    hs-source-dirs:   tests
+                  ,   app
+    --other-modules:
+    default-language: Haskell2010

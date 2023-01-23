@@ -73,11 +73,12 @@ body s = intercalate s . map field . fields
   where field f = fid f ++ " " ++ fty f
 
 -- Golang ADT multiline string generator
--- takes and adt and generates it's
---     interface, structs, impl funcs and constructors 
-makeAdt :: Adt -> String
-makeAdt a = concat
-  [ interface a
+-- takes and a package name and an adt
+-- generates it's interface, structs, impl funcs and constructors 
+makeAdt :: String -> Adt -> String
+makeAdt name a = concat
+  [ printf "package %s\n\n" name
+  , interface a
   , "\n\n// Data Constructors Structs\n"
   , concatMap (struct a) (rules a)
   , "\n\n// Implement the interface\n"

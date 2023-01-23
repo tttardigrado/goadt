@@ -1,6 +1,7 @@
 module Adt where
 
-import Data.List (intercalate)
+import Data.List   ( intercalate )
+import Text.Printf ( printf      )
 
 -- data name[p1, p2, ...] = r1 | r2 | ...
 data Adt = Adt
@@ -35,3 +36,10 @@ gensDef a = if null $ params a then "" else printf "[%s any]"
 gensFun :: Adt -> String
 gensFun a = if null $ params a then "" else printf "[%s]"
   (intercalate ", " $ params a)
+
+-- adt interface
+-- implName is a dummy function to determine which types implement the interface (data constructors)
+-- type Name[A, ... any] interface { implName() }
+interface :: Adt -> String
+interface a =  printf "type %s%s interface { impl%s() }\n"
+  (name a) (gensDef a) (name a)

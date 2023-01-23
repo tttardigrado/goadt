@@ -9,6 +9,12 @@ Algebraic data types generator for the Go programming language
 
 ![Logo](./logo.png)
 
+## Tech stack
+* Haskell
+* Golang
+* Parsec
+* CmdArgs
+
 ## Product types
 A product type `A x B` is a compounded type that combines one element from each of the types. It corresponds to logical `AND`.
 
@@ -50,6 +56,9 @@ func (_ TRUE) implBOOL() {}
 type FALSE struct {}
 func (_ FALSE) implBOOL() {}
 ```
+
+## Using GoADT
+Check the [examples](./examples/) directory to see how one could use `goadt` and `go generate` to automatically generate ADTs
 
 ## References:
 1. [Go and Algebraic data types](https://eli.thegreenplace.net/2018/go-and-algebraic-data-types/) by Eli Bendersky

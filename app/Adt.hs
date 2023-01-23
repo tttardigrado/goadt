@@ -57,9 +57,17 @@ impl :: Adt -> Rule -> String
 impl a r = printf "func (_ %s%s) impl%s() {}\n"
   (tag r) (gensFun a) (name a)
 
+-- constructor function for a given data constructor (rule)
+-- func NewTag[A, ... any](f1 t1, ...) Name[A, ...] { return Tag[A, ...]{ f1: f1, ... } }
+construcct :: Adt -> Rule -> String
+construcct a r = printf "func New%s%s(%s) %s%s { return %s%s{ %s } }\n"
+  (tag r) (gensDef a) (body ", " r) (name a) (gensFun a) (tag r) (gensFun a) (args $ fields r)
+  where args = intercalate ", " . map fset
+        fset f = fid f ++ ": " ++ fid f
+
 -- generate the body of a struct, func params, ... based on fields
--- if "; " is the separator:
--- id1 ty1; id2 ty2; ... 
+-- let s = "; " then:
+--     id1 ty1; id2 ty2; ... 
 body :: String -> Rule -> String
 body s = intercalate s . map field . fields
   where field f = fid f ++ " " ++ fty f

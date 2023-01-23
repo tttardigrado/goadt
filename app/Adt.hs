@@ -8,19 +8,19 @@ data Adt = Adt
   { name   :: String   -- adt name
   , params :: [String] -- generic type parameters
   , rules  :: [Rule]   -- data construtors
-  } deriving Show
+  } deriving (Show, Eq)
 
 -- tag(f1, f2, ...)
 data Rule = Rule
   { tag    :: String  -- data constructor tag
   , fields :: [Field] -- data constructor arguments
-  } deriving Show
+  } deriving (Show, Eq)
 
 -- id : type
 data Field = Field
   { fid :: String -- field id
   , fty :: String -- field type
-  } deriving Show
+  } deriving (Show, Eq)
 
 
 -- generic types to be used in type and function definitions

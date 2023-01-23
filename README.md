@@ -7,3 +7,7 @@
 
 ![Logo](./logo.png)
 
+
+## References:
+1. [Go and Algebraic data types](https://eli.thegreenplace.net/2018/go-and-algebraic-data-types/) by Eli Bendersky
+2. 

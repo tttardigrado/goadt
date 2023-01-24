@@ -3,7 +3,7 @@
 ![Tests CI](https://github.com/tttardigrado/goadt/actions/workflows/tests.yml/badge.svg)
 ![Build CI](https://github.com/tttardigrado/goadt/actions/workflows/build.yml/badge.svg)
 ![License](https://img.shields.io/github/license/tttardigrado/goadt)
-<a href="https://twitter.com/intent/tweet?text=Check out goadt by %40_tardigrado_ https%3A%2F%2Fgithub.com%2Ftttardigrado%2Fgoadt 😁"><img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftttardigrado%2Fgoadt"></a>
+<a href="https://twitter.com/intent/tweet?text=Check out goadt, a Golang Algebraic Data Type generator written by %40_tardigrado_ in Haskell https%3A%2F%2Fgithub.com%2Ftttardigrado%2Fgoadt 😁"><img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Ftttardigrado%2Fgoadt"></a>
 
 Algebraic data types generator for the Go programming language
 
@@ -64,11 +64,13 @@ func (_ Right) implEither() {}
 Let's start with an example of an ADT: `Opt`. This type represents the possibility of the non-existence of a value (in Haskell it's known as `Maybe`, but we will define an isomorphic `Opt` type)
 
 ```haskell
+-- haskell
 data Opt a
   = None
   | Some a
 ```
 ```go
+// go
 type Opt[A any] interface { implOpt() }
 
 // Data Constructors Structs
@@ -84,7 +86,7 @@ func NewSome[A any](V A) Opt[A] { return Some[A]{ V: V } }
 func NewNone[A any](   ) Opt[A] { return None[A]{      } }
 ```
 
-Now, let's see how to use it. In most functional programming languages (like Haskell, Ocaml and SML) ADTs can be combined with `pattern matching`, but, unfortunately, go does not have that feature. The closest analog is a `type switch`.
+Now, let's see how to use it. In most functional programming languages (like Haskell, Ocaml and SML) ADTs can be used with `pattern matching`, but, unfortunately, go does not have that feature. The closest analog is a `type switch`.
 
 ```haskell
 -- haskell

@@ -22,17 +22,17 @@ In golang, we are going to represent product types as `structs`.
 
 ```haskell
 -- haskell
-data Point = Point
-  { x :: Int
-  , y :: Int
+data Tuple a b = Tuple
+  { x :: a
+  , y :: b
   }
 ```
 
 ```go
 // golang
-type Point struct {
-    X int
-    Y int
+type Tuple[A, B any] struct {
+    x A
+    y B
 }
 ```
 
@@ -42,19 +42,21 @@ A sum type `A + B` is a compounded type that requires one element from one of th
 In golang, we are going to represent product types as `interfaces`
 ```haskell
 -- haskell
-data BOOL = TRUE | FALSE
+data Either a b
+  = Left a
+  | Right b
 ```
 ```go
 // go
-type BOOL infterface {
-    implBOOL()
+type Either[A, B any] infterface {
+    implEither()
 }
 
-type TRUE struct {}
-func (_ TRUE) implBOOL() {}
+type Left[A, B any] struct { a A }
+func (_ Left) implEither() {}
 
-type FALSE struct {}
-func (_ FALSE) implBOOL() {}
+type Right[A, B any] struct { b B }
+func (_ Right) implEither() {}
 ```
 
 ## Using GoADT

@@ -1,5 +1,7 @@
 package main
 
+
+//go-sumtype:decl Bool
 type Bool interface { implBool() }
 
 

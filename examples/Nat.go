@@ -1,5 +1,7 @@
 package main
 
+
+//go-sumtype:decl Nat
 type Nat interface { implNat() }
 
 

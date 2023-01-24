@@ -1,5 +1,7 @@
 package main
 
+
+//go-sumtype:decl Int
 type Int interface { implInt() }
 
 

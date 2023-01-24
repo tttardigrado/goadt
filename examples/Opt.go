@@ -1,5 +1,7 @@
 package main
 
+
+//go-sumtype:decl Opt
 type Opt[A any] interface { implOpt() }
 
 

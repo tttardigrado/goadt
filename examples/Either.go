@@ -1,5 +1,7 @@
 package main
 
+
+//go-sumtype:decl Either
 type Either[A, B any] interface { implEither() }
 
 

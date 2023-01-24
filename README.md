@@ -59,6 +59,53 @@ type Right[A, B any] struct { b B }
 func (_ Right) implEither() {}
 ```
 
+## Using ADTs
+
+Let's start with an example of an ADT: `Opt`. This type represents the possibility of the non-existence of a value (in Haskell it's known as `Maybe`, but we will define an isomorphic `Opt` type)
+
+```haskell
+data Opt a
+  = None
+  | Some a
+```
+```go
+type Opt[A any] interface { implOpt() }
+
+// Data Constructors Structs
+type Some[A any] struct { V A }
+type None[A any] struct {     }
+
+// Implement the interface
+func (_ Some[A]) implOpt() { }
+func (_ None[A]) implOpt() { }
+
+// Constructors
+func NewSome[A any](V A) Opt[A] { return Some[A]{ V: V } }
+func NewNone[A any](   ) Opt[A] { return None[A]{      } }
+```
+
+Now, let's see how to use it. In most functional programming languages (like Haskell, Ocaml and SML) ADTs can be combined with `pattern matching`, but, unfortunately, go does not have that feature. The closest analog is a `type switch`.
+
+```haskell
+-- haskell
+map :: (a -> r) -> Opt a -> Opt r
+map fn (Some v) = Some $ fn v
+map fn  None    = None
+```
+
+```go
+// go
+func Map[A, R any](fn func(A) R, opt Opt[A]) (res Opt[R]) {
+	switch t := opt.(type) {
+	case Some[A]: res = NewSome(fn(t.V))
+	case None[A]: res = NewNone[R]()
+	}
+	return
+}
+```
+
+If you build your functions this way, [go-sumtype](https://github.com/BurntSushi/go-sumtype) can be used to check for the exhaustiveness of the type switches. 
+
 ## Using GoADT
 Check the [examples](./examples/) directory to see how one could use `goadt` and `go generate` to automatically generate ADTs
 

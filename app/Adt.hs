@@ -77,7 +77,8 @@ body s = intercalate s . map field . fields
 -- generates it's interface, structs, impl funcs and constructors 
 makeAdt :: String -> Adt -> String
 makeAdt pkg a = concat
-  [ printf "package %s\n\n" pkg
+  [ "package " ++ pkg ++ "\n\n\n"
+  , "//go-sumtype:decl " ++ name a ++ "\n"
   , interface a
   , "\n\n// Data Constructors Structs\n"
   , concatMap (struct a) (rules a)

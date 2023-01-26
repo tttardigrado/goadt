@@ -14,9 +14,10 @@ Algebraic data types generator for the Go programming language
 * Golang
 * Parsec
 * CmdArgs
+* Go-Sumtypes
 
 ## Product types
-A product type `A x B` is a compounded type that combines one element from each of the types. It corresponds to logical `AND`.
+A product type `A x B` is a compounded type that combines one element from each of the types. According to the Curry-Howard isomorphism, it corresponds to the `AND` operation in intuitionistic logic.
 
 In golang, we are going to represent product types as `structs`.
 
@@ -37,7 +38,7 @@ type Tuple[A, B any] struct {
 ```
 
 ## Sum types
-A sum type `A + B` is a compounded type that requires one element from one of the types (corresponds to logical `OR`).
+A sum type `A + B` is a compounded type that requires one element from one of the types. According to the Curry-Howard isomorphism, it corresponds to the `OR` operation in intuitionistic logic.
 
 In golang, we are going to represent product types as `interfaces`
 ```haskell
